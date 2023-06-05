@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AwardController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\PersonController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,3 +22,5 @@ Route::get('/', [IndexController::class, 'index']);
 // handle the request by the App\Http\Controllers\AwardController controller
 // and its index method
 Route::get('/awards', [AwardController::class, 'index']);
+
+Route::get('/person', [PersonController::class, 'detail']);
