@@ -12,6 +12,11 @@
 
     <h2>Search term: <?= $search_term ?></h2>
 
+    <form action="/search" method="get">
+        <input type="text" name="search" value="<?= htmlspecialchars($search_term) ?>">
+        <button>Search</button>
+    </form>
+
     <ul>
         <?php foreach ($results as $movie) : ?>
             <li>
