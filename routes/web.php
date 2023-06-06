@@ -4,6 +4,7 @@ use App\Http\Controllers\AwardController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\PersonController;
+use App\Http\Controllers\VideogameController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,3 +31,4 @@ Route::get('/movie', [MovieController::class, 'detail']);
 Route::get('/search', [MovieController::class, 'search']);
 Route::get('/movies/shawshank-redemption', [MovieController::class, 'shawshank']);
 Route::get('/top-rated-movies', [MovieController::class, 'topRated']);
+Route::get('/top-rated-games', [VideogameController::class, 'topRated']);
