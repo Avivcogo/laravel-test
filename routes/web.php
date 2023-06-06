@@ -26,3 +26,4 @@ Route::get('/awards', [AwardController::class, 'index']);
 
 Route::get('/movies/genre/action', [MovieController::class, 'actionMovies']);
 Route::get('/person', [PersonController::class, 'detail']);
+Route::get('/movie', [MovieController::class, 'detail']);
