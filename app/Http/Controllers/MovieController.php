@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Movie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -128,16 +129,31 @@ class MovieController extends Controller
 
     public function topRated()
     {
-        $query = "
-            SELECT *
-            FROM `movies`
-            WHERE `votes_nr` >= ?
-                AND `movie_type_id` = ?
-            ORDER BY `rating` DESC
-            LIMIT 50
-        ";
+        $builder = Movie::where('votes_nr', '>=', 5000);  // FROM `movies` WHERE `votes_nr` >= 5000
 
-        $movies = DB::select($query, [5000, 1]);
+        $builder->limit(50); // LIMIT 50
+
+        $ordered = true;
+
+        if ($ordered) {
+            $builder->orderBy('rating', 'desc'); // ORDER BY `rating` DESC
+        }
+
+        $builder->where('movie_type_id', 1); // AND `movie_type_id` = 1
+
+        $movies = $builder->get(); // SELECT *
+
+
+        // $query = "
+        //     SELECT *
+        //     FROM `movies`
+        //     WHERE `votes_nr` >= ?
+        //         AND `movie_type_id` = ?
+        //     ORDER BY `rating` DESC
+        //     LIMIT 50
+        // ";
+
+        // $movies = DB::select($query, [5000, 1]);
 
         return view('movies.top-rated', compact('movies'));
     }
