@@ -25,10 +25,12 @@ Route::get('/', [IndexController::class, 'index']);
 // and its index method
 Route::get('/awards', [AwardController::class, 'index']);
 
+Route::get('/movies', [MovieController::class, 'index']);
 Route::get('/movies/genre/action', [MovieController::class, 'actionMovies']);
 Route::get('/person', [PersonController::class, 'detail']);
 Route::get('/movie', [MovieController::class, 'detail']);
 Route::get('/search', [MovieController::class, 'search']);
 Route::get('/movies/shawshank-redemption', [MovieController::class, 'shawshank']);
 Route::get('/top-rated-movies', [MovieController::class, 'topRated']);
+Route::get('/games', [VideogameController::class, 'index']);
 Route::get('/top-rated-games', [VideogameController::class, 'topRated']);

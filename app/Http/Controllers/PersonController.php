@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Person;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -15,29 +16,36 @@ class PersonController extends Controller
             abort(404);
         }
 
-        $person = DB::selectOne('
-            SELECT *
-            FROM `people`
-            WHERE `id` = ?
-        ', [
-            $person_id
-        ]);
+        $person = Person::findOrFail($person_id);
+        // $person = DB::selectOne('
+        //     SELECT *
+        //     FROM `people`
+        //     WHERE `id` = ?
+        // ', [
+        //     $person_id
+        // ]);
 
-        if (!$person) {
-            abort(404);
-        }
+        // if (!$person) {
+        //     abort(404);
+        // }
 
-        $all_movies = DB::select("
-            SELECT `positions`.`name` AS position_name, `movies`.*
-            FROM `movie_person`
-            LEFT JOIN `positions`
-                ON `movie_person`.`position_id` = `positions`.`id`
-            LEFT JOIN `movies`
-                ON `movie_person`.`movie_id` = `movies`.`id`
-            WHERE `movie_person`.`person_id` = ?
-        ", [
-            $person->id
-        ]);
+        $all_movies = $person->movies()
+            ->select('movies.*', 'movie_person.description', 'positions.name AS position_name')
+            ->leftJoin('positions', 'movie_person.position_id', 'positions.id')
+            ->orderBy('year', 'desc')
+            ->get();
+
+        // $all_movies = DB::select("
+        //     SELECT `positions`.`name` AS position_name, `movies`.*
+        //     FROM `movie_person`
+        //     LEFT JOIN `positions`
+        //         ON `movie_person`.`position_id` = `positions`.`id`
+        //     LEFT JOIN `movies`
+        //         ON `movie_person`.`movie_id` = `movies`.`id`
+        //     WHERE `movie_person`.`person_id` = ?
+        // ", [
+        //     $person->id
+        // ]);
 
         $movies_sorted_by_position = [];
         foreach ($all_movies as $movie) {

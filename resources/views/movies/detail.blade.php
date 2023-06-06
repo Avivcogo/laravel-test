@@ -19,7 +19,17 @@
         <h2>Top rated movie</h2>
     <?php endif; ?>
 
+    <h2>Genres</h2>
 
+    <?= $movie->genres->pluck('name')->join(', ') ?>
+
+    <h2>Languages</h2>
+
+    <?= $movie->languages->pluck('name')->join(', ') ?>
+
+    <h2>Countries of origin</h2>
+
+    <?= $movie->originCountries->pluck('name')->join(', ') ?>
 
     <h2>Cast & crew</h2>
 

@@ -3,11 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\Movie;
+use App\Models\MovieType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class VideogameController extends Controller
 {
+    public function index()
+    {
+        // select all games
+        $movie_type = MovieType::where('name', 'game')->first();
+
+        var_dump($movie_type->movies->pluck('name')); die();
+        dd($movie_type);
+    }
+
     public function topRated()
     {
         $videogames = Movie::query()        // FROM `movies`
