@@ -25,5 +25,12 @@
         <?php endforeach; ?>
     </ul>
 
+    <h2>Search for a movie:</h2>
+
+    <form action="/search" method="get">
+        <input type="text" name="search">
+        <button>Search</button>
+    </form>
+
 </body>
 </html>
