@@ -3,6 +3,7 @@
 use App\Http\Controllers\AwardController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\MovieController;
+use App\Http\Controllers\PersonController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,3 +25,4 @@ Route::get('/', [IndexController::class, 'index']);
 Route::get('/awards', [AwardController::class, 'index']);
 
 Route::get('/movies/genre/action', [MovieController::class, 'actionMovies']);
+Route::get('/person', [PersonController::class, 'detail']);
