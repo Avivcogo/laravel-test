@@ -29,3 +29,4 @@ Route::get('/person', [PersonController::class, 'detail']);
 Route::get('/movie', [MovieController::class, 'detail']);
 Route::get('/search', [MovieController::class, 'search']);
 Route::get('/movies/shawshank-redemption', [MovieController::class, 'shawshank']);
+Route::get('/top-rated-movies', [MovieController::class, 'topRated']);
