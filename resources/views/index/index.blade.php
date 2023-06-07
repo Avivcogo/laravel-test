@@ -1,28 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Laravel IMDB project</title>
+@include('html-start')
 
-    <link rel="stylesheet" href="/css/style.css">
-</head>
-<body>
+    @php
+        $string = '<h1>Headline</h1>';
+    @endphp
 
+    {{ $string }}
+    {!! $string !!}
+
+    <!-- Comment in HTML (no sensitive info here) -->
+    {{-- users are idiots --}}
     <h1>This is the homepage</h1>
 
     <h2>Top movies</h2>
 
     <ul>
-        <?php foreach ($top_movies as $movie) : ?>
+        @foreach ($top_movies as $movie)
             <li>
-                <?= $movie->name ?>
-                (<?= $movie->year ?>)
+                {{ $movie->name }}
+                ({{ $movie->year }})
 
-                - <?= $movie->rating ?>/10
+                - {{ $movie->rating }}/10
             </li>
-        <?php endforeach; ?>
+        @endforeach
     </ul>
 
     <h2>Search for a movie:</h2>
@@ -32,5 +31,5 @@
         <button>Search</button>
     </form>
 
-</body>
-</html>
+
+@include('html-end')

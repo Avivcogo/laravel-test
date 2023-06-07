@@ -61,10 +61,8 @@ class MovieController extends Controller
         ));
     }
 
-    public function detail()
+    public function detail($movie_id)
     {
-        $movie_id = $_GET['id'] ?? null;
-
         if (!$movie_id) {
             abort(404);
         }
@@ -188,16 +186,18 @@ class MovieController extends Controller
         ]);
     }
 
-    public function topRated()
+    public function topRated($year = null, $orderby = null)
     {
         $builder = Movie::where('votes_nr', '>=', 5000);  // FROM `movies` WHERE `votes_nr` >= 5000
 
         $builder->limit(50); // LIMIT 50
 
-        $ordered = true;
+        if ($orderby) {
+            $builder->orderBy($orderby, 'desc'); // ORDER BY `rating` DESC
+        }
 
-        if ($ordered) {
-            $builder->orderBy('rating', 'desc'); // ORDER BY `rating` DESC
+        if ($year) {
+            $builder->where('year', $year);
         }
 
         $builder->where('movie_type_id', 1); // AND `movie_type_id` = 1

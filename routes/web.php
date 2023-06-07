@@ -28,9 +28,20 @@ Route::get('/awards', [AwardController::class, 'index']);
 Route::get('/movies', [MovieController::class, 'index']);
 Route::get('/movies/genre/action', [MovieController::class, 'actionMovies']);
 Route::get('/person', [PersonController::class, 'detail']);
-Route::get('/movie', [MovieController::class, 'detail']);
+
+// originally: /movie?id=111161
+// now:        /movie/111161
+Route::get('/movie/{id}', [MovieController::class, 'detail'])->whereNumber('id');
 Route::get('/search', [MovieController::class, 'search']);
 Route::get('/movies/shawshank-redemption', [MovieController::class, 'shawshank']);
-Route::get('/top-rated-movies', [MovieController::class, 'topRated']);
+Route::get('/top-rated-movies/{year?}/{order?}', [MovieController::class, 'topRated'])->where('year', '^\d{4}$')->whereIn('order', ['name', 'rating', 'votes_nr']);
 Route::get('/games', [VideogameController::class, 'index']);
 Route::get('/top-rated-games', [VideogameController::class, 'topRated']);
+
+
+//                   view identifier
+//                          ↓
+Route::view('/welcome', 'welcome');
+
+
+Route::redirect('/vitejte', '/welcome');
